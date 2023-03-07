@@ -1,0 +1,53 @@
+.wrapper {
+    max-width: 46rem;
+    margin: -1.6875rem auto 2rem auto;
+    padding: 0 1rem;
+}
+
+.creteTaskForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.creteTaskForm input {
+    padding: 1rem;
+    background-color: var(--gray-500);
+    color: var(--gray-100);
+    border: 1px solid var(--gray-700);
+    border-radius: 8px;
+    outline: transparent;
+    width: 100%;
+}
+
+.creteTaskForm input:focus {
+    border: 1px solid var(--purple-dark);
+}
+
+.creteTaskForm button[type='submit'] {
+    padding: 1rem;
+    background-color: var(--blue-dark);
+    color: var(--gray-100);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.creteTaskForm button[type='submit']:hover {
+    background-color: var(--blue);
+    transition: background-color 0.2s;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 87.5%;
+    }
+}
