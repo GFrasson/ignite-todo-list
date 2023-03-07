@@ -98,6 +98,7 @@
     align-items: center;
     color: var(--gray-300);
     border-top: 1px solid var(--gray-400);
+    text-align: center;
 }
 
 .emptyTasks svg {
