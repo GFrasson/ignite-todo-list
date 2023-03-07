@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { PlusCircle, ClipboardText } from 'phosphor-react';
 import { v4 as uuidV4 } from 'uuid';
 
@@ -18,6 +18,7 @@ interface TaskItem {
 function App() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
+  const localStorageTasksAttributeName = "todo-tasks";
 
   function handleCreateTask(event: FormEvent): void {
     event.preventDefault();
@@ -28,8 +29,11 @@ function App() {
       isTaskDone: false
     };
 
-    setTasks([...tasks, newTask]);
+    const newTasksArray = [...tasks, newTask];
+
+    setTasks(newTasksArray);
     setNewTaskText('');
+    updateLocalStorageTasks(newTasksArray);
   }
 
   function handleTaskDoneChange(taskId: string): void {
@@ -45,17 +49,31 @@ function App() {
     });
 
     setTasks(updatedTasks);
+    updateLocalStorageTasks(updatedTasks);
   }
 
   function handleDeleteTask(taskIdToDelete: string): void {
     const tasksWithoutDeletedOne = tasks.filter((task) => task.id !== taskIdToDelete);
     setTasks(tasksWithoutDeletedOne);
+    updateLocalStorageTasks(tasksWithoutDeletedOne);
   }
 
   function countDoneTasks(): number {
     const doneTasks = tasks.filter((task) => task.isTaskDone);
     return doneTasks.length;
   }
+
+  function updateLocalStorageTasks(tasks: TaskItem[]) {
+    localStorage.setItem(localStorageTasksAttributeName, JSON.stringify(tasks));
+  }
+
+  useEffect(() => {
+    const localStorageTasksStringified = localStorage.getItem(localStorageTasksAttributeName);
+    if (localStorageTasksStringified) {
+      const localStorageTasks = JSON.parse(localStorageTasksStringified) as TaskItem[];
+      setTasks(localStorageTasks);
+    }
+  }, []);
 
   return (
     <div className="App">
