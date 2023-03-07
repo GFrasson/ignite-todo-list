@@ -1,4 +1,6 @@
-import { PlusCircle } from  'phosphor-react';
+import { FormEvent, useState } from 'react';
+import { PlusCircle } from 'phosphor-react';
+import { v4 as uuidV4 } from 'uuid';
 
 import { Header } from './components/Header';
 import { Task } from './components/Task';
@@ -7,40 +9,101 @@ import styles from './App.module.css';
 
 import './global.css';
 
+interface TaskItem {
+  id: string;
+  description: string;
+  isTaskDone: boolean;
+}
+
 function App() {
+  const [tasks, setTasks] = useState<TaskItem[]>([]);
+  const [newTaskText, setNewTaskText] = useState('');
+
+  function handleCreateTask(event: FormEvent): void {
+    event.preventDefault();
+
+    const newTask: TaskItem = {
+      id: uuidV4(),
+      description: newTaskText,
+      isTaskDone: false
+    };
+
+    setTasks([...tasks, newTask]);
+    setNewTaskText('');
+  }
+
+  function handleTaskDoneChange(taskId: string): void {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          isTaskDone: !task.isTaskDone
+        };
+      }
+      
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  }
+
+  function handleDeleteTask(taskIdToDelete: string): void {
+    const tasksWithoutDeletedOne = tasks.filter((task) => task.id !== taskIdToDelete);
+    setTasks(tasksWithoutDeletedOne);
+  }
+
+  function countDoneTasks(): number {
+    const doneTasks = tasks.filter((task) => task.isTaskDone);
+    return doneTasks.length;
+  }
+
   return (
     <div className="App">
       <Header />
 
       <div className={styles.wrapper}>
-        <form className={styles.creteTaskForm}>
+        <form
+          className={styles.creteTaskForm}
+          onSubmit={handleCreateTask}
+        >
           <input
             id="task"
             name="task"
             type="text"
             placeholder="Adicione uma nova tarefa"
+            value={newTaskText}
+            onChange={(event) => setNewTaskText(event.target.value)}
           />
           <button type="submit">
             Criar
             <PlusCircle size={16} />
           </button>
         </form>
-        
+
         <main className={styles.tasksList}>
           <header className={styles.listHeader}>
             <div className={styles.createdTasks}>
               <span className={styles.createdTasksText}>Tarefas criadas</span>
-              <span className={styles.badge}>5</span>
+              <span className={styles.badge}>{tasks.length}</span>
             </div>
             <div className={styles.doneTasks}>
               <span className={styles.doneTasksText}>Concluídas</span>
-              <span className={styles.badge}>2 de 5</span>
+              <span className={styles.badge}>{countDoneTasks()} de {tasks.length}</span>
             </div>
           </header>
-          
-          <Task />
-          <Task />
-          <Task />
+
+          {
+            tasks.map((task) => (
+              <Task
+                key={task.id}
+                id={task.id}
+                description={task.description}
+                isTaskDone={task.isTaskDone}
+                onTaskDoneChange={handleTaskDoneChange}
+                onTaskDelete={handleDeleteTask}
+              />
+            ))
+          }
         </main>
       </div>
     </div>
