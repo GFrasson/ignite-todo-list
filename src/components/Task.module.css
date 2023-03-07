@@ -1,0 +1,117 @@
+.task {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.75rem;
+
+    padding: 1rem;
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-400);
+    border-radius: 8px;
+
+    transition: border 0.5s;
+}
+
+.task.done {
+    border: 1px solid var(--gray-500);
+    transition: border 0.5s;
+}
+
+.task .checkboxContainer {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    height: 1.5rem;
+    min-width: 1.5rem;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.task .check {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.task .checkmark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: calc((1.5rem - 1.09rem) / 2);
+    left: calc((1.5rem - 1.09rem) / 2);
+    width: 1.09rem;
+    height: 1.09rem;
+    border: 1.5px solid var(--blue);
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.task .checkmarkHoverBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--blue-dark);
+    width: calc(1.09rem - 2.5px);
+    height: calc(1.09rem - 2.5px);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.task .checkboxContainer:hover input:not(:checked) ~ .checkmark {
+    border: 1.5px solid var(--blue-dark);
+    transition: border 0.2s;
+}
+
+.task .checkboxContainer:hover input:not(:checked) ~ .checkmark .checkmarkHoverBackground {
+    opacity: 0.2;
+    transition: opacity 0.2s;
+}
+
+.task input:checked ~ .checkmark {
+    border: 1.5px solid var(--purple-dark);
+    background-color: var(--purple-dark);
+    transition: all 0.2s;
+}
+
+.task .checkboxContainer:hover input:checked ~ .checkmark {
+    border: 1.5px solid var(--purple);
+    background-color: var(--purple);
+    transition: all 0.2s;
+}
+
+.task .description {
+    font-size: 0.875rem;
+    transition: text-decoration, color 0.5s;
+}
+
+.task.done .description {
+    text-decoration: line-through;
+    color: var(--gray-300);
+    transition: all 0.5s;
+}
+
+.task .deleteTask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 1.5rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--gray-300);
+    cursor: pointer;
+}
+
+.task .deleteTask:hover {
+    background-color: var(--gray-400);
+    color: var(--danger);
+}
