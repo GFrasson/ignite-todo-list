@@ -71,10 +71,11 @@ function App() {
             name="task"
             type="text"
             placeholder="Adicione uma nova tarefa"
+            required
             value={newTaskText}
             onChange={(event) => setNewTaskText(event.target.value)}
           />
-          <button type="submit">
+          <button type="submit" disabled={!newTaskText}>
             Criar
             <PlusCircle size={16} />
           </button>

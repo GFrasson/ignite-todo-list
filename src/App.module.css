@@ -41,9 +41,14 @@
     gap: 0.5rem;
 }
 
-.creteTaskForm button[type='submit']:hover {
+.creteTaskForm button[type='submit']:not(:disabled):hover {
     background-color: var(--blue);
     transition: background-color 0.2s;
+}
+
+.creteTaskForm button[type='submit']:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
 }
 
 .tasksList {
