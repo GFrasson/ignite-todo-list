@@ -12,6 +12,10 @@
     transition: border 0.5s;
 }
 
+.task + .task {
+    margin-top: 0.75rem;
+}
+
 .task.done {
     border: 1px solid var(--gray-500);
     transition: border 0.5s;

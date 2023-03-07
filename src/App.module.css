@@ -46,6 +46,45 @@
     transition: background-color 0.2s;
 }
 
+.tasksList {
+    margin-top: 4rem;
+}
+
+.tasksList .listHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.createdTasks {
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.createdTasksText {
+    margin-right: 0.5rem;
+}
+
+.badge {
+    background-color: var(--gray-400);
+    color: var(--gray-200);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.doneTasks {
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.doneTasksText {
+    margin-right: 0.5rem;
+}
+
 @media (max-width: 768px) {
     html {
         font-size: 87.5%;

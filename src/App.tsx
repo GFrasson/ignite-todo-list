@@ -25,10 +25,23 @@ function App() {
             <PlusCircle size={16} />
           </button>
         </form>
-
-        <Task />
-        <Task />
-        <Task />
+        
+        <main className={styles.tasksList}>
+          <header className={styles.listHeader}>
+            <div className={styles.createdTasks}>
+              <span className={styles.createdTasksText}>Tarefas criadas</span>
+              <span className={styles.badge}>5</span>
+            </div>
+            <div className={styles.doneTasks}>
+              <span className={styles.doneTasksText}>Concluídas</span>
+              <span className={styles.badge}>2 de 5</span>
+            </div>
+          </header>
+          
+          <Task />
+          <Task />
+          <Task />
+        </main>
       </div>
     </div>
   )
