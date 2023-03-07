@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { PlusCircle } from 'phosphor-react';
+import { PlusCircle, ClipboardText } from 'phosphor-react';
 import { v4 as uuidV4 } from 'uuid';
 
 import { Header } from './components/Header';
@@ -93,16 +93,30 @@ function App() {
           </header>
 
           {
-            tasks.map((task) => (
-              <Task
-                key={task.id}
-                id={task.id}
-                description={task.description}
-                isTaskDone={task.isTaskDone}
-                onTaskDoneChange={handleTaskDoneChange}
-                onTaskDelete={handleDeleteTask}
-              />
-            ))
+            tasks.length === 0 ? (
+              <>
+                <div className={styles.emptyTasks}>
+                  <ClipboardText size={56} />
+                  <p className={styles.emptyTasksTitle}>
+                    Você ainda não tem tarefas cadastradas
+                  </p>
+                  <p>
+                    Crie tarefas e organize seus itens a fazer
+                  </p>
+                </div>
+              </>
+            ) : (
+              tasks.map((task) => (
+                <Task
+                  key={task.id}
+                  id={task.id}
+                  description={task.description}
+                  isTaskDone={task.isTaskDone}
+                  onTaskDoneChange={handleTaskDoneChange}
+                  onTaskDelete={handleDeleteTask}
+                />
+              ))
+            )
           }
         </main>
       </div>

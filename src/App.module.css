@@ -85,6 +85,24 @@
     margin-right: 0.5rem;
 }
 
+.emptyTasks {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray-300);
+    border-top: 1px solid var(--gray-400);
+}
+
+.emptyTasks svg {
+    margin-bottom: 1rem;
+}
+
+.emptyTasksTitle {
+    font-weight: 700;
+}
+
 @media (max-width: 768px) {
     html {
         font-size: 87.5%;
